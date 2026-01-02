@@ -1,0 +1,9 @@
+﻿@model Courses
+
+<form asp-action="Upsert" method="post">
+    <label asp-for="Title"></label>
+    <input asp-for="Title" />
+    <span asp-validation-for="Title"></span>
+
+    <button type="submit"> Create</button>
+</form>

@@ -1,0 +1,26 @@
+﻿@model List<Courses>
+<h5>Courses list</h5>
+<a asp-action="Upsert" asp-controller="Course">Create</a>
+<table class="mt-2">
+    <tr>
+        <td>Id</td>
+        <td>Title</td>
+        <td>Created</td>
+        <td>Action</td>
+
+    </tr>
+    @foreach( var item in Model)
+    {
+        <tr>
+            <td>@item.CourseId</td>
+            <td>@item.Title</td>
+            <td>@item.CreatedAt</td>
+            <td>
+                <button asp-route-id="@item.CourseId">Edit</button>
+                <button asp-route-id="@item.CourseId">Delete</button>
+            </td>
+        </tr>
+    }
+   
+
+</table>
