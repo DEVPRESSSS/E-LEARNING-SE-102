@@ -9,7 +9,7 @@ namespace E_LEARNING_SE_102_PROJECT.Models
 
         [Key]
         public string? ContentId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Description is required")]
         [MaxLength(500)]
         public string? Description { get; set; }
         

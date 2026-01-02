@@ -1,0 +1,30 @@
+﻿@model List<Lesson>
+<h5>Lesson list</h5>
+<a asp-action="Upsert" asp-controller="Lesson">Create</a>
+<table class="mt-2">
+    <tr>
+        <td>LessonId</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Course</td>
+        <td>UploadedAt</td>
+        <td>Action</td>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.LessonId</td>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.Courses?.Title</td>
+            <td>@item.UploadedAt</td>
+            <td>
+                <a asp-action="Upsert" asp-controller="Lesson" asp-route-id="@item.LessonId">Edit</a>
+                <a asp-action="Delete" asp-controller="Lesson" asp-route-id="@item.LessonId">Delete</a>
+            </td>
+        </tr>
+    }
+
+
+</table>

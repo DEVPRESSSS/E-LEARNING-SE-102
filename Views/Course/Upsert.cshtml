@@ -1,9 +1,20 @@
 ﻿@model Courses
 
 <form asp-action="Upsert" method="post">
+    <input asp-for="CourseId" hidden/>
     <label asp-for="Title"></label>
     <input asp-for="Title" />
     <span asp-validation-for="Title"></span>
 
-    <button type="submit"> Create</button>
+    @if (Model?.CourseId != null)
+    {
+        <button type="submit">Update</button>
+
+    }
+    else
+    {
+        <button type="submit">Create</button>
+
+    }
+
 </form>

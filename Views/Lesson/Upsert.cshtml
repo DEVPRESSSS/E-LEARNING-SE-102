@@ -1,0 +1,30 @@
+﻿@model Lesson
+
+<form asp-action="Upsert" method="post">
+    <input asp-for="LessonId" hidden />
+    <label asp-for="Title"></label>
+    <input asp-for="Title" />
+    <span asp-validation-for="Title"></span>
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+    <span asp-validation-for="Description"></span>
+
+
+    <select asp-for="CourseId" asp-items="ViewBag.CoursesList">
+        <option value="">-- Select Course --</option>
+    </select>
+
+
+    @if (Model?.LessonId != null)
+    {
+        <button type="submit">Update</button>
+
+    }
+    else
+    {
+        <button type="submit">Create</button>
+
+    }
+
+</form>

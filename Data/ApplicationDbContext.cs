@@ -12,6 +12,7 @@ namespace E_LEARNING_SE_102_PROJECT.Data
 
         //Courses table
         public DbSet<Courses> Courses { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
