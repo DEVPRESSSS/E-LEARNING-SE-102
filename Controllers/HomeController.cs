@@ -81,7 +81,7 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
             }
 
             if (!lessons.Any())
-                return NotFound("No lessons found for this course.");
+                return View();
 
             // Determine selected lesson
             Lesson selectedLesson = lessons.FirstOrDefault(l => l.LessonId == lessonId) ?? lessons.First();

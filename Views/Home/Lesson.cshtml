@@ -1,6 +1,6 @@
 @model List<Lesson>
     
-@if (Model?.Count > 0)
+@if (Model?.Count() > 0)
 {
     <div class="container mt-4">
         <div class="row">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="lesson-body">
                             <div class="mb-4">
-                                <p class="mb-2">@lesson.Description</p>
+                                <p class="mb-2">@Html.Raw(lesson.Description)</p>
                                 <small class="text-muted">
                                     Uploaded @lesson.UploadedAt.ToString("dd MMM yyyy")
                                 </small>
@@ -61,7 +61,7 @@
                                     <div class="content-item">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <h6 class="mb-1">@content.Description</h6>
+                                                <h6 class="mb-1">@Html.Raw(content.Description)</h6>
                                                 <small class="text-muted">
                                                     @content.FileType
                                                     @if (content.UploadedAt.HasValue)
