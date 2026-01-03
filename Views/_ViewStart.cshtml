@@ -1,3 +1,10 @@
 ﻿@{
     Layout = "_Layout";
+
+    // Load courses into ViewBag for all views
+    var db = Context.RequestServices.GetService(typeof(E_LEARNING_SE_102_PROJECT.Data.ApplicationDbContext)) as E_LEARNING_SE_102_PROJECT.Data.ApplicationDbContext;
+    if (db != null)
+    {
+        ViewBag.Courses = db.Courses.ToList();
+    }
 }

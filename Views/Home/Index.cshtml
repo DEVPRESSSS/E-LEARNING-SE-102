@@ -1,15 +1,6 @@
-﻿@model List<Courses>
-@{
+﻿@{
     ViewData["Title"] = "Home";
 }
 
-<!-- Course Menu -->
 <div class="course-menu text-center" id="courseMenu">
-    @foreach (var item in Model)
-    {
-        <a id="course-navigation" asp-action="Lesson" asp-controller="Home" asp-route-id="@item.CourseId" >
-            @item.Title
-        </a>
-    }
 </div>
-@* onclick="setActive(this, event)" *@

@@ -20,7 +20,7 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
         {
             var courses = _context.Courses
                 .ToList();
-
+            ViewBag.Courses = courses;
             return View(courses);
         }
 
@@ -31,18 +31,64 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
             return View();
         }
 
-        public IActionResult Lesson(string? id)
+        public IActionResult Lesson(string? courseId, string? lessonId)
         {
+            List<Lesson> lessons;
 
-            var listOfContents = _context.Lessons.
-                 Include(x => x.Courses)
-                .Where(x=> x.CourseId ==  id).ToList();
-            if (listOfContents == null)
-                return NotFound();
-            
+            if (!string.IsNullOrEmpty(courseId))
+            {
+                lessons = _context.Lessons
+                    .Include(l => l.Courses)
+                    .Include(l => l.Contents)
+                    .Where(l => l.CourseId == courseId)
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(lessonId))
+            {
+                // If only lessonId is passed, find its course
+                var lesson = _context.Lessons
+                    .Include(l => l.Courses)
+                    .Include(l => l.Contents)
+                    .FirstOrDefault(l => l.LessonId == lessonId);
 
+                if (lesson == null) return NotFound();
 
-            return View(listOfContents);
+                courseId = lesson.CourseId;
+                lessons = _context.Lessons
+                    .Include(l => l.Courses)
+                    .Include(l => l.Contents)
+                    .Where(l => l.CourseId == courseId)
+                    .ToList();
+            }
+            else
+            {
+                // No courseId or lessonId passed → pick first course automatically
+                var firstLesson = _context.Lessons
+                    .Include(l => l.Courses)
+                    .Include(l => l.Contents)
+                    .FirstOrDefault();
+
+                if (firstLesson == null)
+                    return NotFound("No lessons found.");
+
+                courseId = firstLesson.CourseId;
+                lessons = _context.Lessons
+                    .Include(l => l.Courses)
+                    .Include(l => l.Contents)
+                    .Where(l => l.CourseId == courseId)
+                    .ToList();
+                lessonId = firstLesson.LessonId;
+            }
+
+            if (!lessons.Any())
+                return NotFound("No lessons found for this course.");
+
+            // Determine selected lesson
+            Lesson selectedLesson = lessons.FirstOrDefault(l => l.LessonId == lessonId) ?? lessons.First();
+
+            ViewData["SelectedLesson"] = selectedLesson;
+
+            return View(lessons);
         }
 
         public IActionResult Details(string? id)

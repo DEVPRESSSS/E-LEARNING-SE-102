@@ -27,6 +27,7 @@ body {
   margin-bottom: 60px;
 }
 
+
 /* HOME/INDEX CSS */
 /* Horizontal Menu */
 .course-menu {
@@ -54,3 +55,103 @@ body {
   background: var(--accent);
   opacity: 1;
 }
+
+/* LESSON CSS */
+.lesson-sidebar {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+
+    .lesson-sidebar .list-group-item {
+        border: none;
+        border-left: 3px solid transparent;
+        padding: 1rem 1.25rem;
+        transition: all 0.2s ease;
+        color: var(--dark);
+    }
+
+    .lesson-sidebar .list-group-item:hover {
+        background: var(--light);
+        border-left-color: var(--accent);
+    }
+
+    .lesson-sidebar .list-group-item.active {
+        background: var(--light);
+        border-left-color: var(--accent);
+        color: var(--dark);
+        font-weight: 500;
+    }
+
+    .lesson-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border: none;
+    }
+
+    .lesson-header {
+        background: var(--dark);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .lesson-header h4 {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .lesson-body {
+        padding: 2rem;
+    }
+
+    .content-item {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        transition: all 0.2s ease;
+    }
+
+    .content-item:hover {
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(26, 188, 156, 0.1);
+    }
+
+    .btn-view {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-view:hover {
+        background: #16a085;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .course-badge {
+        background: var(--light);
+        border: 1px solid #e9ecef;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        color: var(--dark);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: #6c757d;
+    }
+
+    .divider {
+        border-top: 1px solid #e9ecef;
+        margin: 1.5rem 0;
+    }

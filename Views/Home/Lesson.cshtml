@@ -1,25 +1,114 @@
 @model List<Lesson>
-
-@if(Model?.Count() >0)
+    
+@if (Model?.Count > 0)
 {
-    <div class="d-flex justify-content-center">
-        @foreach (var item in Model)
-        {
-
-            <div class="card">
-                <h5 class="card-header">@item.Title</h5>
-                <div class="card-body">
-                    <h5 class="card-header">@item.Description</h5>
-                    <h6 class="card-title">@item.Courses?.Title</h6>
-                    <p class="card-text">@item.UploadedAt</p>
-
-                    <a asp-action="Details" asp-controller="Home" asp-route-id="@item.LessonId" class="btn btn-success w-100">View Course</a>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="lesson-sidebar sticky-top" style="top: 20px;">
+                    <div class="list-group list-group-flush">
+                        @foreach (var item in Model)
+                        {
+                            var selectedLesson = ViewData["SelectedLesson"] as Lesson;
+                            var isActive = selectedLesson != null && selectedLesson.LessonId == item.LessonId;
+                            <a asp-action="Lesson"
+                               asp-route-courseId="@item.CourseId"
+                               asp-route-lessonId="@item.LessonId"
+                               class="list-group-item list-group-item-action @(isActive ? "active" : "")">
+                                @item.Title
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
-        }
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                @{
+                    var lesson = ViewData["SelectedLesson"] as Lesson;
+                }
+
+                @if (lesson != null)
+                {
+                    <div class="lesson-card">
+                        <div class="lesson-header">
+                            <h4>@lesson.Title</h4>
+                        </div>
+                        <div class="lesson-body">
+                            <div class="mb-4">
+                                <p class="mb-2">@lesson.Description</p>
+                                <small class="text-muted">
+                                    Uploaded @lesson.UploadedAt.ToString("dd MMM yyyy")
+                                </small>
+                            </div>
+
+                            @if (lesson.Courses != null)
+                            {
+                                <div class="course-badge mb-4">
+                                    <strong>Course:</strong> @lesson.Courses.Title
+                                </div>
+                            }
+
+                            <div class="divider"></div>
+
+                            <h6 class="mb-3" style="color: var(--dark); font-weight: 600;">Lesson Contents</h6>
+                            
+                            @if (lesson.Contents != null && lesson.Contents.Any())
+                            {
+                                @foreach (var content in lesson.Contents)
+                                {
+                                    <div class="content-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">@content.Description</h6>
+                                                <small class="text-muted">
+                                                    @content.FileType
+                                                    @if (content.UploadedAt.HasValue)
+                                                    {
+                                                        <span> • @content.UploadedAt.Value.ToString("dd MMM yyyy")</span>
+                                                    }
+                                                </small>
+                                            </div>
+                                            <a href="@Url.Content(content.FilePath)" 
+                                               class="btn-view" 
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                View
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="empty-state">
+                                    <p class="mb-0">No contents uploaded yet for this lesson</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="lesson-card">
+                        <div class="empty-state">
+                            <p class="mb-0">Select a lesson from the sidebar to view details</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 }
 else
 {
-    <h5>No uploaded lesson yet nigga:(</h5>
+    <div class="container mt-5">
+        <div class="lesson-card">
+            <div class="empty-state">
+                <h5>No uploaded lessons yet 😅</h5>
+                <p class="mb-0">Check back later or contact your instructor</p>
+            </div>
+        </div>
+    </div>
 }

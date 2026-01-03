@@ -41,6 +41,20 @@
                 </div>
             </div>
         </nav>
+        <div class="course-menu text-center" id="courseMenu">
+            @if (ViewBag.Courses != null)
+            {
+                foreach (var item in ViewBag.Courses)
+                {
+                    <a class="course-navigation" 
+                    asp-action="Lesson" 
+                    asp-controller="Home" 
+                    asp-route-courseId="@item.CourseId">
+                        @item.Title
+                    </a>
+                }
+            }
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
