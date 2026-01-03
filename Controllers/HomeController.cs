@@ -1,5 +1,7 @@
+using E_LEARNING_SE_102_PROJECT.Data;
 using E_LEARNING_SE_102_PROJECT.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace E_LEARNING_SE_102_PROJECT.Controllers
@@ -7,15 +9,22 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context; 
         }
 
         public IActionResult Index()
         {
-            return View();
+            var contents = _context.Contents.
+                        Include(x=>x.Lesson)
+                            .ThenInclude(c=>c.Courses)
+                        .ToList();
+
+
+            return View(contents);
         }
 
         public IActionResult Privacy()
