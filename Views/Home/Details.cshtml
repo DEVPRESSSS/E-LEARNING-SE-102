@@ -1,6 +1,6 @@
 ﻿@model Contents
 
-<input asp-for="ContentId" hidden/>
+<input asp-for="LessonId" hidden/>
 <div class="card">
     <h5 class="card-header">@Model.Lesson?.Courses?.Title</h5>
     <div class="card-body">
@@ -9,6 +9,6 @@
         <p class="card-text">@Model.Description</p>
         <p class="card-text">@Model.UploadedAt</p>
   
-        <a asp-action="Login" class="btn btn-success w-100">View More</a>
+        <a asp-action="Login" class="btn btn-success w-100">Use data to see more content nigga</a>
     </div>
 </div>

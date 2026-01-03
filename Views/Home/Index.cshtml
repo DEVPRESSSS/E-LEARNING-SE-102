@@ -7,8 +7,9 @@
 <div class="course-menu text-center" id="courseMenu">
     @foreach (var item in Model)
     {
-        <a asp-action="Lesson" asp-controller="Home" asp-route-id="@item.CourseId" onclick="setActive(this, event)">
+        <a id="course-navigation" asp-action="Lesson" asp-controller="Home" asp-route-id="@item.CourseId" >
             @item.Title
         </a>
     }
 </div>
+@* onclick="setActive(this, event)" *@

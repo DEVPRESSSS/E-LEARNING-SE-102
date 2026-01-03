@@ -34,31 +34,30 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
         public IActionResult Lesson(string? id)
         {
 
-            var detail = _context.Contents.
-                 Include(x => x.Lesson)
-                            .ThenInclude(c => c.Courses)
-                .FirstOrDefault(x=> x.ContentId ==  id);
-            if (detail == null)
+            var listOfContents = _context.Lessons.
+                 Include(x => x.Courses)
+                .Where(x=> x.CourseId ==  id).ToList();
+            if (listOfContents == null)
                 return NotFound();
             
 
 
-            return View(detail);
+            return View(listOfContents);
         }
 
         public IActionResult Details(string? id)
         {
 
-            var detail = _context.Contents.
+            var contentOfLesson = _context.Contents.
                  Include(x => x.Lesson)
                             .ThenInclude(c => c.Courses)
-                .FirstOrDefault(x=> x.ContentId ==  id);
-            if (detail == null)
+                .FirstOrDefault(x=> x.LessonId ==  id);
+            if (contentOfLesson == null)
                 return NotFound();
             
 
 
-            return View(detail);
+            return View(contentOfLesson);
         }
 
         public IActionResult Privacy()
