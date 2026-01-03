@@ -27,6 +27,28 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
             return View(contents);
         }
 
+        public IActionResult Login()
+        {
+
+
+            return View();
+        }
+
+        public IActionResult Details(string? id)
+        {
+
+            var detail = _context.Contents.
+                 Include(x => x.Lesson)
+                            .ThenInclude(c => c.Courses)
+                .FirstOrDefault(x=> x.ContentId ==  id);
+            if (detail == null)
+                return NotFound();
+            
+
+
+            return View(detail);
+        }
+
         public IActionResult Privacy()
         {
             return View();

@@ -11,13 +11,12 @@
 <div class="d-flex justify-content-center">
     @foreach(var item in Model)
     {
-        <div class="card" style="width: 18rem;">
+        <div class="card m-2" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">@item.Lesson?.Courses?.Title</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@item.Lesson?.Description</h6>
                 <p class="card-text"> @item.Description</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@item.ContentId" class="card-btn btn btn-success">Read more</a>
             </div>
         </div>
     }
