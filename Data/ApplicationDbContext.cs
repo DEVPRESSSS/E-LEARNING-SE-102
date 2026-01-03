@@ -14,6 +14,7 @@ namespace E_LEARNING_SE_102_PROJECT.Data
         public DbSet<Courses> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Contents> Contents { get; set; }
+        public DbSet<ApplicationUser> AppUser { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
