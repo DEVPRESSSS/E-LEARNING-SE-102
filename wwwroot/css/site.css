@@ -1,3 +1,9 @@
+:root {
+  --accent: #1ABC9C;
+  --dark: #282A35;
+  --light: #f5f6f7;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,4 +25,32 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+/* HOME/INDEX CSS */
+/* Horizontal Menu */
+.course-menu {
+  background: var(--dark);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.course-menu a:hover {
+  background-color: black;
+  color: white;
+}
+
+.course-menu a {
+  display: inline-block;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.course-menu a.active {
+  background: var(--accent);
+  opacity: 1;
 }

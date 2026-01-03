@@ -18,13 +18,10 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
 
         public IActionResult Index()
         {
-            var contents = _context.Contents.
-                        Include(x=>x.Lesson)
-                            .ThenInclude(c=>c.Courses)
-                        .ToList();
+            var courses = _context.Courses
+                .ToList();
 
-
-            return View(contents);
+            return View(courses);
         }
 
         public IActionResult Login()
@@ -32,6 +29,21 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
 
 
             return View();
+        }
+
+        public IActionResult Lesson(string? id)
+        {
+
+            var detail = _context.Contents.
+                 Include(x => x.Lesson)
+                            .ThenInclude(c => c.Courses)
+                .FirstOrDefault(x=> x.ContentId ==  id);
+            if (detail == null)
+                return NotFound();
+            
+
+
+            return View(detail);
         }
 
         public IActionResult Details(string? id)
