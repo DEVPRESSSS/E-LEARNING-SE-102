@@ -1,0 +1,34 @@
+﻿@model Contents
+
+<form asp-action="Upsert" method="post">
+    <input asp-for="ContentId" hidden />
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+    <span asp-validation-for="Description"></span>
+
+    <label asp-for="FilePath"></label>
+    <input asp-for="FilePath" />
+    <span asp-validation-for="FilePath"></span>
+
+    <label asp-for="FileType"></label>
+    <input asp-for="FileType" />
+    <span asp-validation-for="FileType"></span>
+
+    <select asp-for="LessonId" asp-items="ViewBag.LessonsList">
+        <option value="">-- Select lesson --</option>
+    </select>
+    <span asp-validation-for="LessonId"></span>
+
+
+    @if (Model?.ContentId != null)
+    {
+        <button type="submit">Update</button>
+
+    }
+    else
+    {
+        <button type="submit">Create</button>
+
+    }
+
+</form>

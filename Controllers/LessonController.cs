@@ -99,7 +99,7 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
             }
 
             //Find the ID
-            var obj = _context.Lessons.FirstOrDefault(x => x.CourseId == id);
+            var obj = _context.Lessons.FirstOrDefault(x => x.LessonId == id);
 
             if (obj == null)
             {
@@ -115,12 +115,6 @@ namespace E_LEARNING_SE_102_PROJECT.Controllers
 
         }
 
-        //Get list of Courses
-        public IActionResult GetCourses()
-        {
-           
-
-            return View();
-        }
+    
     }
 }
