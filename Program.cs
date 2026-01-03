@@ -1,4 +1,5 @@
 using E_LEARNING_SE_102_PROJECT.Data;
+using E_LEARNING_SE_102_PROJECT.Services.DbInitializer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,5 +30,18 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+SeedDabase();
 app.Run();
+
+
+void SeedDabase(){
+
+    using(var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+
+        
+
+    }
+ }
