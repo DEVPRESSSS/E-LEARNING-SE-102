@@ -1,6 +1,108 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Sign Up";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+            <div class="card border-1">
+                <div class="card-body p-4 p-sm-5">
+
+                    <h2 class="card-title text-center mb-2 fw-bold">Create Account</h2>
+                    <p class="text-center text-muted mb-4">
+                        Sign up to get started
+                    </p>
+
+                    <form asp-action="Signup" method="post" id="signupForm">
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label for="nameInput" class="form-label">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="fas fa-user text-muted"></i>
+                                </span>
+                                <input type="text"
+                                       class="form-control border-start-0 ps-0"
+                                       id="nameInput"
+                                       name="FullName"
+                                       placeholder="Enter your full name"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="emailInput" class="form-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="fas fa-envelope text-muted"></i>
+                                </span>
+                                <input type="email"
+                                       class="form-control border-start-0 ps-0"
+                                       id="emailInput"
+                                       name="Email"
+                                       placeholder="Enter your email"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="passwordInput" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="fas fa-lock text-muted"></i>
+                                </span>
+                                <input type="password"
+                                       class="form-control border-start-0 border-end-0 ps-0"
+                                       id="passwordInput"
+                                       name="Password"
+                                       placeholder="Create a password"
+                                       required>
+                                <span class="input-group-text bg-light border-start-0 password-toggle" id="togglePassword">
+                                    <i class="fas fa-eye text-muted" id="toggleIcon"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-4">
+                            <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="fas fa-lock text-muted"></i>
+                                </span>
+                                <input type="password"
+                                       class="form-control border-start-0 ps-0"
+                                       id="confirmPasswordInput"
+                                       name="ConfirmPassword"
+                                       placeholder="Confirm your password"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit"
+                                class="btn w-100 py-2 mb-3"
+                                style="background-color: #282A35; color: white;">
+                            Sign Up
+                        </button>
+
+                        <!-- Footer -->
+                        <div class="text-center">
+                            <span class="text-muted small">Already have an account?</span>
+                            <a asp-controller="Home"
+                               asp-action="Login"
+                               class="text-decoration-none small fw-semibold ms-1">
+                                Login
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

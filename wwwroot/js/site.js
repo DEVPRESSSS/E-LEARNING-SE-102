@@ -17,3 +17,27 @@ document.querySelectorAll('.course-navigation').forEach(el => {
     });
 });
 
+//LOGIN JS
+const togglePassword = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('passwordInput');
+const toggleIcon = document.getElementById('toggleIcon');
+
+togglePassword.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+            
+    // Toggle icon
+    if (type === 'password') {
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    } else {
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    }
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Login functionality would be implemented here!');
+});
+
