@@ -128,7 +128,9 @@ namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                
+                    ModelState.AddModelError(string.Empty, "Invalid email or password.");
+                 
                     return Page();
                 }
             }

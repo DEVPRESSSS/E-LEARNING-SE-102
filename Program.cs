@@ -3,6 +3,8 @@ using E_LEARNING_SE_102_PROJECT.Services.DbInitializer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using E_LEARNING_SE_102_PROJECT.Models;
+using E_LEARNING_SE_102_PROJECT.Utilities.EmailSender;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 //Register the db initializer
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-
+//Register the email sender
+builder.Services.AddScoped<IEmailSender, EmailsSender>();
 //Register Razor pages
 builder.Services.AddRazorPages();
 

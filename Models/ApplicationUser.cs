@@ -5,8 +5,7 @@ namespace E_LEARNING_SE_102_PROJECT.Models
 {
     public class ApplicationUser: IdentityUser
     {
-        [Key]
-        public  string? AppUserId { get; set; }
+    
         [Required, MaxLength(50)]
         public string? FirstName { get; set; }
         [Required, MaxLength(50)]
