@@ -44,23 +44,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 d-flex justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Course" asp-action="Index">Courses</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Course" asp-action="Index">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Lesson" asp-action="Index">Lessons</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Lesson" asp-action="Index">Lessons</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Content" asp-action="Index">Contents</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Content" asp-action="Index">Contents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
-                        <li class="nav-item">
+                       @*  <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">SignUp</a>
-                        </li>
+                        </li> *@
                     </ul>
                 </div>
             </div>
@@ -86,9 +86,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer   text-muted">
-        <div class="container">
-            &copy; 2025 - devpress101 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            &copy; 2025 - devpress101 - & Sora
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

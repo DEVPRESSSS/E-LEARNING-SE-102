@@ -31,7 +31,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Learner}/{controller=Home}/{action=Index}/{id?}");
+
 //Call the function
 SeedDatabase();
 

@@ -47,7 +47,7 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.HasKey("AppUserId");
 
-                    b.ToTable("AppUser");
+                    b.ToTable("AppUser", (string)null);
                 });
 
             modelBuilder.Entity("E_LEARNING_SE_102_PROJECT.Models.Contents", b =>
@@ -79,7 +79,7 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Contents");
+                    b.ToTable("Contents", (string)null);
                 });
 
             modelBuilder.Entity("E_LEARNING_SE_102_PROJECT.Models.Courses", b =>
@@ -97,7 +97,7 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("E_LEARNING_SE_102_PROJECT.Models.Lesson", b =>
@@ -126,7 +126,7 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lessons", (string)null);
                 });
 
             modelBuilder.Entity("E_LEARNING_SE_102_PROJECT.Models.Contents", b =>
