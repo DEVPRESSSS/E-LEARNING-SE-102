@@ -1,0 +1,76 @@
+﻿@model Contents
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        @(Model?.ContentId != null ? "Update Content" : "Create Content")
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Upsert" method="post">
+                        <input asp-for="ContentId" hidden />
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea id="tiny"
+                                      asp-for="Description"
+                                      rows="5"
+                                      class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+
+                        <!-- File Path -->
+                        <div class="mb-3">
+                            <label asp-for="FilePath" class="form-label"></label>
+                            <input asp-for="FilePath" class="form-control" />
+                            <span asp-validation-for="FilePath" class="text-danger small"></span>
+                        </div>
+
+                        <!-- File Type -->
+                        <div class="mb-3">
+                            <label asp-for="FileType" class="form-label"></label>
+                            <input asp-for="FileType" class="form-control" />
+                            <span asp-validation-for="FileType" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Lesson Dropdown -->
+                        <div class="mb-4">
+                            <label asp-for="LessonId" class="form-label"></label>
+                            <select asp-for="LessonId"
+                                    asp-items="ViewBag.LessonsList"
+                                    class="form-select">
+                                <option value="">-- Select lesson --</option>
+                            </select>
+                            <span asp-validation-for="LessonId" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+
+                            @if (Model?.ContentId != null)
+                            {
+                                <button type="submit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success">
+                                    Create
+                                </button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

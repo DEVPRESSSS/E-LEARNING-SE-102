@@ -7,10 +7,34 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_LEARNING_SE_102_PROJECT.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tiny.cloud/1/xoe2vhd8f1qd6rziqh9w3rlnb4v4yfjqaxetj7hnztmmx1ik/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Jan 17, 2026:
+                'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+            ],
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+            uploadcare_public_key: '7217749889970980e0a2',
+        });
+    </script>
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">E-LEARNING</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,27 +44,41 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 d-flex justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Course" asp-action="Index">Courses</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Course" asp-action="Index">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Lesson" asp-action="Index">Lessons</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Lesson" asp-action="Index">Lessons</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Content" asp-action="Index">Contents</a>
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Content" asp-action="Index">Contents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
-                        <li class="nav-item">
+                       @*  <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">SignUp</a>
-                        </li>
+                        </li> *@
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="course-menu text-center" id="courseMenu">
+            @if (ViewBag.Courses != null)
+            {
+                foreach (var item in ViewBag.Courses)
+                {
+                    <a class="course-navigation" 
+                    asp-action="Lesson" 
+                    asp-controller="Home" 
+                    asp-route-courseId="@item.CourseId">
+                        @item.Title
+                    </a>
+                }
+            }
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -48,9 +86,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer   text-muted">
-        <div class="container">
-            &copy; 2025 - devpress101 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            &copy; 2025 - devpress101 - & Sora
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

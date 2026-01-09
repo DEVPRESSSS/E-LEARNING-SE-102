@@ -20,6 +20,6 @@ namespace E_LEARNING_SE_102_PROJECT.Models
         public Courses? Courses { get; set; }
 
         //Navigation for courses
-        public ICollection<Courses> ListOfCourses { get; set; } = new List<Courses> ();
+        public ICollection<Contents> Contents { get; set; } = new List<Contents> ();
     }
 }
