@@ -1,6 +1,8 @@
 using E_LEARNING_SE_102_PROJECT.Data;
 using E_LEARNING_SE_102_PROJECT.Services.DbInitializer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using E_LEARNING_SE_102_PROJECT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +13,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("DevConnection")
     ));
+
+//Register the identity with application user and identity role
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
 //Register the db initializer
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
+//Register Razor pages
+builder.Services.AddRazorPages();
+
+//Build the application
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,10 +38,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
@@ -36,6 +49,7 @@ app.MapControllerRoute(
 //Call the function
 SeedDatabase();
 
+//app.MapRazorPages();
 app.Run();
 
 //Function to seed and start database

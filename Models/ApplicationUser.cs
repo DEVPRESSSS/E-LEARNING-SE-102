@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_LEARNING_SE_102_PROJECT.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser: IdentityUser
     {
         [Key]
         public  string? AppUserId { get; set; }
