@@ -25,7 +25,11 @@
                                 <span class="input-group-text bg-light border-end-0">
                                     <i class="fas fa-user text-muted"></i>
                                 </span>
-                                <input asp-for="Input.FirstName" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter your firstname" maxlength="20"/>
+                                <input asp-for="Input.FirstName" class="form-control" 
+                                   autocomplete="username" aria-required="true"
+                                   placeholder="Enter your firstname"
+                                   maxlength="20" 
+                                   oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
 
                             </div>
                             <span asp-validation-for="Input.FirstName" class="text-danger"></span>
@@ -37,7 +41,10 @@
                                 <span class="input-group-text bg-light border-end-0">
                                     <i class="fas fa-user text-muted"></i>
                                 </span>
-                                <input asp-for="Input.MiddleName" class="form-control" aria-required="true" placeholder="Enter your Middlename" maxlength="20"/>
+                                <input asp-for="Input.MiddleName"
+                                    class="form-control" aria-required="true" 
+                                    placeholder="Enter your Middlename" maxlength="20"
+                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
 
                             </div>
                             <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
@@ -49,7 +56,9 @@
                                 <span class="input-group-text bg-light border-end-0">
                                     <i class="fas fa-user text-muted"></i>
                                 </span>
-                                <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Enter your lastname" maxlength="20" />
+                                <input asp-for="Input.LastName" 
+                                class="form-control" aria-required="true"
+                                       placeholder="Enter your lastname" maxlength="20" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
 
                             </div>
                             <span asp-validation-for="Input.LastName" class="text-danger"></span>

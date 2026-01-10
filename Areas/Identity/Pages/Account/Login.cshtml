@@ -23,7 +23,7 @@
                                 <span class="input-group-text bg-light border-end-0">
                                     <i class="fas fa-envelope text-muted"></i>
                                 </span>
-                                <input asp-for="Input.Email" id="email" class="form-control"  autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                <input asp-for="Input.Email" id="email" class="form-control"  autocomplete="username" aria-required="true" placeholder="name@example.com" maxlength="45"/>
 
                             </div>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
@@ -36,7 +36,7 @@
                                 <span class="input-group-text bg-light border-end-0">
                                     <i class="fas fa-lock text-muted"></i>
                                 </span>
-                                <input asp-for="Input.Password" id="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                                <input asp-for="Input.Password" id="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" maxlength="20" />
 
                                 <span class="input-group-text bg-light border-start-0 password-toggle" id="togglePassword">
                                     <i class="fas fa-eye text-muted" id="toggleIcon"></i>
