@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using E_LEARNING_SE_102_PROJECT.Utilities;
 
 namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
 {
@@ -98,6 +99,13 @@ namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            public string FirstName { get; set; }
+            [Required]
+            public string MiddleName { get; set; }
+            [Required, MaxLength(50)]
+            public string LastName { get; set; }
+           // public string Suffix { get; set; }
         }
 
 
@@ -115,13 +123,22 @@ namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.FirstName = Input.FirstName;
+                user.MiddleName = Input.MiddleName;
+                user.LastName = Input.LastName;
+                user.EmailConfirmed = true;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, SD.Learner);
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
