@@ -6,6 +6,7 @@
 		<RootNamespace>E_LEARNING_SE_102_PROJECT</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="DotNetEnv" Version="3.1.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.36" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.36" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
@@ -20,6 +21,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+		<PackageReference Include="SendGrid" Version="9.29.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Controllers\" />

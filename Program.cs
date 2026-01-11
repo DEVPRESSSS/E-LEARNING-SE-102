@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using E_LEARNING_SE_102_PROJECT.Models;
 using E_LEARNING_SE_102_PROJECT.Utilities.EmailSender;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,8 @@ builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IEmailSender, EmailsSender>();
 //Register Razor pages
 builder.Services.AddRazorPages();
-
+//Load the env
+Env.Load();
 //Build the application
 var app = builder.Build();
 

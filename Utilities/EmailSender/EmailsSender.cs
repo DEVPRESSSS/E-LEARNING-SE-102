@@ -41,7 +41,7 @@ namespace E_LEARNING_SE_102_PROJECT.Utilities.EmailSender
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"Failed to send email to {email}: {ex.Message}");
             }
         }
     }
