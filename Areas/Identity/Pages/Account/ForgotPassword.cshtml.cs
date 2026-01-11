@@ -61,13 +61,15 @@ namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
 
-             
+
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var email = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(user.Email));
+
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", code },
+                    values: new { area = "Identity", code, email },
                     protocol: Request.Scheme);
 
                 await _emailSender.SendEmailAsync(
