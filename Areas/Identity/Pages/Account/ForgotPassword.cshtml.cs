@@ -58,7 +58,9 @@ namespace E_LEARNING_SE_102_PROJECT.Areas.Identity.Pages.Account
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    //return RedirectToPage("./ForgotPasswordConfirmation");
+                    ModelState.AddModelError("", "Email doest not exist");
+                    return Page();
                 }
 
 
