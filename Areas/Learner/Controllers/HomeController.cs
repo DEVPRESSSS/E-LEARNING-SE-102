@@ -1,5 +1,6 @@
 using E_LEARNING_SE_102_PROJECT.Data;
 using E_LEARNING_SE_102_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;

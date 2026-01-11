@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,9 +8,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_LEARNING_SE_102_PROJECT.styles.css" asp-append-version="true" />
-    <script src="https://cdn.tiny.cloud/1/xoe2vhd8f1qd6rziqh9w3rlnb4v4yfjqaxetj7hnztmmx1ik/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-
-    <script>
+@*     <script src="https://cdn.tiny.cloud/1/xoe2vhd8f1qd6rziqh9w3rlnb4v4yfjqaxetj7hnztmmx1ik/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+ *@
+@*     <script>
         tinymce.init({
             selector: 'textarea',
             plugins: [
@@ -29,7 +30,7 @@
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
             uploadcare_public_key: '7217749889970980e0a2',
         });
-    </script>
+    </script> *@
 
 </head>
 <body>
@@ -46,7 +47,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.IsInRole("Admin"))
+                      
+                        @if (User.IsInRole(SD.Admin))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Course" asp-action="Index">Courses</a>
@@ -61,6 +63,8 @@
                                 <a class="nav-link text-white" asp-area="Admin" asp-controller="Content" asp-action="Index">Contents</a>
                             </li>
                         }
+                      
+              
                    
                             
                     </ul>
