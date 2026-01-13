@@ -1,0 +1,36 @@
+﻿@model ApplicationUser
+
+<form asp-action="Upsert" method="post">
+    <input asp-for="Id" hidden />
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName" />
+    <span asp-validation-for="FirstName"></span>
+
+    <label asp-for="MiddleName"></label>
+    <input asp-for="MiddleName" />
+    <span asp-validation-for="MiddleName"></span>
+
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName" />
+    <span asp-validation-for="LastName"></span>
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" type="email" />
+    <span asp-validation-for="Email"></span>
+
+    <label asp-for="PasswordHash"></label>
+    <input asp-for="PasswordHash" type="password" />
+    <span asp-validation-for="PasswordHash"></span>
+
+    @if (Model?.Id != null)
+    {
+        <button type="submit">Update</button>
+
+    }
+    else
+    {
+        <button type="submit">Create</button>
+
+    }
+
+</form>

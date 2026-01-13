@@ -1,0 +1,40 @@
+﻿@model List<ApplicationUser>
+
+
+<div class="border-1 border-secondary shadow-sm">
+
+    <div class="border-bottom-1">
+        <h6>User list</h6>
+
+    </div>
+    <a class="btn  btn-primary" asp-action="Upsert" asp-controller="User">Create</a>
+    <table class="table">
+        <tr>
+            <td>User Id</td>
+            <td>Firstname</td>
+            <td>Middlename</td>
+            <td>Lastname</td>
+            <td>Username</td>
+            <td>Email</td>
+            <td>Action</td>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.MiddleName </td>
+                <td>@item.LastName</td>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="User" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Lock" asp-controller="User" asp-route-id="@item.Id">Lock</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
