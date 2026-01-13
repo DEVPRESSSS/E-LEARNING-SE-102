@@ -1,7 +1,7 @@
 ﻿@model List<ApplicationUser>
 
 
-<div class="border-1 border-secondary shadow-sm">
+<div class="shadow-lg mt-5 p-2">
 
     <div class="border-bottom-1">
         <h6>User list</h6>
@@ -29,7 +29,7 @@
                 <td>@item.UserName</td>
                 <td>@item.Email</td>
                 <td>
-                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="User" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-primary" asp-controller="User" asp-action="Upsert" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-danger" asp-action="Lock" asp-controller="User" asp-route-id="@item.Id">Lock</a>
                 </td>
             </tr>
