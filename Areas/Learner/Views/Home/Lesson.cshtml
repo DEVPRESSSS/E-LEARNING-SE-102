@@ -6,16 +6,18 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3">
-                <div class="lesson-sidebar sticky-top" style="top: 20px;">
+                <div class="lesson-sidebar" style="top: 20px; max-height: 100vh; overflow-y: auto; padding-right: 5px;">
                     <div class="list-group list-group-flush">
                         @foreach (var item in Model)
                         {
                             var selectedLesson = ViewData["SelectedLesson"] as Lesson;
                             var isActive = selectedLesson != null && selectedLesson.LessonId == item.LessonId;
-                            <a asp-area= "Learner"asp-controller="Lesson" asp-action="Lesson"
-                               asp-route-courseId="@item.CourseId"
-                               asp-route-lessonId="@item.LessonId"
-                               class="list-group-item list-group-item-action @(isActive ? "active" : "")">
+                            <a asp-area="Learner"
+                            asp-controller="Lesson"
+                            asp-action="Lesson"
+                            asp-route-courseId="@item.CourseId"
+                            asp-route-lessonId="@item.LessonId"
+                            class="list-group-item list-group-item-action @(isActive ? "active" : "")">
                                 @item.Title
                             </a>
                         }
@@ -31,58 +33,35 @@
 
                 @if (lesson != null)
                 {
-                    <div class="lesson-card">
-                        <div class="lesson-header">
-                            <h4>@lesson.Title</h4>
-                        </div>
-                        <div class="lesson-body">
-                            <div class="mb-4">
-                                <p class="mb-2">@Html.Raw(lesson.Description)</p>
-                                <small class="text-muted">
-                                    Uploaded @lesson.UploadedAt.ToString("dd MMM yyyy")
-                                </small>
-                            </div>
-
-                            @if (lesson.Courses != null)
-                            {
-                                <div class="course-badge mb-4">
-                                    <strong>Course:</strong> @lesson.Courses.Title
-                                </div>
-                            }
-
-                            <div class="divider"></div>
-
-                            <h6 class="mb-3" style="color: var(--dark); font-weight: 600;">Lesson Contents</h6>
-                            
+                    <div class="lesson-card border rounded shadow-sm p-3 mb-4" style="max-height: 100vh; overflow-y: auto;">
+                        <div class="lesson-body mb-3 vh-100">
                             @if (lesson.Contents != null && lesson.Contents.Any())
                             {
                                 @foreach (var content in lesson.Contents)
                                 {
-                                    <div class="content-item">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="mb-1">@Html.Raw(content.Description)</h6>
-                                                <small class="text-muted">
-                                                    @content.FileType
-                                                    @if (content.UploadedAt.HasValue)
-                                                    {
-                                                        <span> • @content.UploadedAt.Value.ToString("dd MMM yyyy")</span>
-                                                    }
-                                                </small>
-                                            </div>
-                                            <a href="@Url.Content(content.FilePath)" 
-                                               class="btn-view" 
-                                               target="_blank"
-                                               rel="noopener noreferrer">
-                                                View
-                                            </a>
+                                    <div class="content-item mb-2 p-2 border rounded d-flex justify-content-between align-items-center shadow-sm">
+                                        <div>
+                                            <h6 class="mb-1">@Html.Raw(content.Description)</h6>
+                                            <small class="text-muted">
+                                                @content.FileType
+                                                @if (content.UploadedAt.HasValue)
+                                                {
+                                                    <span> • @content.UploadedAt.Value.ToString("dd MMM yyyy")</span>
+                                                }
+                                            </small>
                                         </div>
+                                        <a href="@Url.Content(content.FilePath)" 
+                                        class="btn btn-sm btn-outline-primary"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                            View
+                                        </a>
                                     </div>
                                 }
                             }
                             else
                             {
-                                <div class="empty-state">
+                                <div class="empty-state text-center text-muted py-3">
                                     <p class="mb-0">No contents uploaded yet for this lesson</p>
                                 </div>
                             }
@@ -91,10 +70,8 @@
                 }
                 else
                 {
-                    <div class="lesson-card">
-                        <div class="empty-state">
-                            <p class="mb-0">Select a lesson from the sidebar to view details</p>
-                        </div>
+                    <div class="lesson-card border rounded shadow-sm p-4 text-center text-muted">
+                        <p class="mb-0">Select a lesson from the sidebar to view details</p>
                     </div>
                 }
             </div>
@@ -103,8 +80,8 @@
 }
 else
 {
-    <div class="container mt-5">
-        <div class="lesson-card">
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="text-center">
             <div class="empty-state">
                 <h5>No uploaded lessons yet 😅</h5>
                 <p class="mb-0">Check back later or contact your instructor</p>

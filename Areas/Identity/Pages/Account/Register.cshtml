@@ -5,126 +5,111 @@
 }
 
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
-            <div class="card border-1">
-                <div class="card-body p-4 p-sm-5">
+<div class="container vh-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+            <div class="card border-0">
+                <div class="row g-0 align-items-center">
 
-                    <h2 class="card-title text-center mb-2 fw-bold">Create Account</h2>
-                    <p class="text-center text-muted mb-4">
-                        Sign up to get started
-                    </p>
+                    <div class="col-md-5 d-none d-md-flex justify-content-center p-4">
+                        <img src="~/images/register.svg"
+                             alt="Register illustration"
+                             class="img-fluid"
+                             style="max-height: 320px;" />
+                    </div>
 
-                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                    <div class="col-12 col-md-7">
+                        <div class="card-body p-4">
 
-                        <div class="mb-3">
-                            <label asp-for="Input.FirstName"></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.FirstName" class="form-control" 
-                                   autocomplete="username" aria-required="true"
-                                   placeholder="Enter your firstname"
-                                   maxlength="20" 
-                                   oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
+                            <h2 class="card-title text-center mb-2 fw-bold">Create Account</h2>
+                            <p class="text-center text-muted mb-3">
+                                Sign up to get started
+                            </p>
 
-                            </div>
-                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="All" class="text-danger mb-2"></div>
 
+                                <!-- Names -->
+                                <div class="row g-2">
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.FirstName"></label>
+                                        <input asp-for="Input.FirstName" class="form-control form-control-sm"
+                                               placeholder="First name" maxlength="20" />
+                                        <span asp-validation-for="Input.FirstName" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.MiddleName"></label>
+                                        <input asp-for="Input.MiddleName" class="form-control form-control-sm"
+                                               placeholder="Middle name" maxlength="20" />
+                                        <span asp-validation-for="Input.MiddleName" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Last name & Email -->
+                                <div class="row g-2 mt-1">
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.LastName"></label>
+                                        <input asp-for="Input.LastName" class="form-control form-control-sm"
+                                               placeholder="Last name" maxlength="20" />
+                                        <span asp-validation-for="Input.LastName" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control form-control-sm"
+                                               placeholder="name@example.com" maxlength="45" />
+                                        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Passwords -->
+                                <div class="row g-2 mt-1">
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.Password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <input asp-for="Input.Password" id="password" type="password" class="form-control form-control-sm"
+                                                placeholder="Password" maxlength="20" />
+                                            <span class="input-group-text bg-light border-start-0 password-toggle" id="togglePassword"
+                                                style="cursor:pointer;">
+                                                <i class="fas fa-eye text-muted small" id="toggleIcon"></i>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <input asp-for="Input.ConfirmPassword" id="confirmPassword" type="password" class="form-control form-control-sm"
+                                                placeholder="Confirm password" maxlength="20" />
+                                            <span class="input-group-text bg-light border-start-0 password-toggle" id="toggleConfirmPassword"
+                                                style="cursor:pointer;">
+                                                <i class="fas fa-eye text-muted small" id="toggleConfirmIcon"></i>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit"
+                                        class="btn btn-sm w-100 mt-3"
+                                        style="background-color:#282A35;color:white;">
+                                    Sign Up
+                                </button>
+
+                                <!-- Footer -->
+                                <div class="text-center mt-2">
+                                    <span class="text-muted small">Already have an account?</span>
+                                    <a asp-controller="Home" asp-action="Login"
+                                       class="text-decoration-none small fw-semibold ms-1">
+                                        Login
+                                    </a>
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label asp-for="Input.MiddleName"></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.MiddleName"
-                                    class="form-control" aria-required="true" 
-                                    placeholder="Enter your Middlename" maxlength="20"
-                                     oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
-
-                            </div>
-                            <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
-
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="Input.LastName"></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.LastName" 
-                                class="form-control" aria-required="true"
-                                       placeholder="Enter your lastname" maxlength="20" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart()" />
-
-                            </div>
-                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
-
-                        </div>
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label asp-for="Input.Email">Email</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" maxlength="45" />
-
-                            </div>
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-
-                        </div>
-
-                     
-                        <!-- Password -->
-                        <div class="mb-3">
-                            <label asp-for="Input.Password"></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.Password" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter your password" maxlength="20"/>
-
-                            </div>
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
-
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="mb-3">
-                            <label asp-for="Input.ConfirmPassword"></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0">
-                                    <i class="fas fa-user text-muted"></i>
-                                </span>
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="username" aria-required="true" placeholder="Confirm your password" maxlength="20"/>
-
-                            </div>
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-
-                        </div>
-
-                        <!-- Submit -->
-                        <button type="submit"
-                                class="btn w-100 py-2 mb-3"
-                                style="background-color: #282A35; color: white;">
-                            Sign Up
-                        </button>
-
-                        <!-- Footer -->
-                        <div class="text-center">
-                            <span class="text-muted small">Already have an account?</span>
-                            <a asp-controller="Home"
-                               asp-action="Login"
-                               class="text-decoration-none small fw-semibold ms-1">
-                                Login
-                            </a>
-                        </div>
-
-                    </form>
+                    </div>
 
                 </div>
             </div>
@@ -133,4 +118,31 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Password toggle
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                toggleIcon.classList.toggle('fa-eye');
+                toggleIcon.classList.toggle('fa-eye-slash');
+            });
+
+            // Confirm Password toggle
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const toggleConfirmIcon = document.getElementById('toggleConfirmIcon');
+
+            toggleConfirmPassword.addEventListener('click', function () {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+                toggleConfirmIcon.classList.toggle('fa-eye');
+                toggleConfirmIcon.classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
 }
