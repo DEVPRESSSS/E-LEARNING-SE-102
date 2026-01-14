@@ -13,10 +13,10 @@
                             var selectedLesson = ViewData["SelectedLesson"] as Lesson;
                             var isActive = selectedLesson != null && selectedLesson.LessonId == item.LessonId;
                             <a asp-area="Learner"
-                            asp-controller="Lesson"
-                            asp-action="Lesson"
-                            asp-route-courseId="@item.CourseId"
-                            asp-route-lessonId="@item.LessonId"
+                               asp-action="Lesson"
+                               asp-controller="Home"
+                               asp-route-lessonId ="@item.LessonId"
+                           
                             class="list-group-item list-group-item-action @(isActive ? "active" : "")">
                                 @item.Title
                             </a>
