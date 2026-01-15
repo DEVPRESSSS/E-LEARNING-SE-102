@@ -22,9 +22,15 @@
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1 d-flex justify-content-center">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
+                             @if (!User.IsInRole(SD.Admin))
+                             {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">About Us</a>
+                                </li>
+                             }
 
                         </ul>
 
@@ -58,7 +64,7 @@
     @if (User.IsInRole(SD.Admin))
     {
         <div class="d-flex m-0">
-            <div class="sidebar bg-dark p-3" style="width: 250px; min-height: calc(100vh - 56px);">
+            <div class="sidebar bg-dark p-3" style="width: 150px; min-height: calc(100vh - 56px);">
                 <ul class="nav flex-column mt-4">
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" href="#" style="transition: all 0.3s;">
@@ -69,25 +75,25 @@
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Course" asp-action="Index" style="transition: all 0.3s;">
                             <i class="fas fa-book me-2"></i>
-                            Courses
+                            Course
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Lesson" asp-action="Index" style="transition: all 0.3s;">
                             <i class="fas fa-graduation-cap me-2"></i>
-                            Lessons
+                            Lesson
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Content" asp-action="Index" style="transition: all 0.3s;">
                             <i class="fas fa-file-alt me-2"></i>
-                            Contents
+                            Content
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="User" asp-action="Index" style="transition: all 0.3s;">
                             <i class="fas fa-users me-2"></i>
-                            App Users
+                            Users
                         </a>
                     </li>
                 </ul>
