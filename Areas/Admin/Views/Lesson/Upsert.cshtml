@@ -1,30 +1,55 @@
 ﻿@model Lesson
 
-<form asp-action="Upsert" method="post">
-    <input asp-for="LessonId" hidden />
-    <label asp-for="Title"></label>
-    <input asp-for="Title" />
-    <span asp-validation-for="Title"></span>
 
-    <label asp-for="Description"></label>
-    <input asp-for="Description" />
-    <span asp-validation-for="Description"></span>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-sm w-50 p-2 border-">
+        <form asp-action="Upsert" method="post">
+            <div asp-validation-summary="All" class="alert-danger"></div>
+            <input asp-for="LessonId" hidden />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
 
+                        </div>
+                   
+                    </div>
 
-    <select asp-for="CourseId" asp-items="ViewBag.CoursesList">
-        <option value="">-- Select Course --</option>
-    </select>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+             
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="CourseId" class="form-label"></label>
+                            <select class="form-control" asp-for="CourseId" asp-items="ViewBag.CoursesList">
+                                <option value="">-- Select Course --</option>
+                            </select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
 
+                        </div>
+                    </div>
 
-    @if (Model?.LessonId != null)
-    {
-        <button type="submit">Update</button>
+                </div>
 
-    }
-    else
-    {
-        <button type="submit">Create</button>
+                @if (Model?.LessonId != null)
+                {
+                    <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success mt-3 w-100">Create</button>
+                }
+            </div>
+        </form>
+    </div>
+   
 
-    }
-
-</form>
+</div>

@@ -1,20 +1,39 @@
 ﻿@model Courses
 
-<form asp-action="Upsert" method="post">
-    <input asp-for="CourseId" hidden/>
-    <label asp-for="Title"></label>
-    <input asp-for="Title" />
-    <span asp-validation-for="Title"></span>
 
-    @if (Model?.CourseId != null)
-    {
-        <button type="submit">Update</button>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-sm w-50 p-2 border-">
+        <form asp-action="Upsert" method="post">
+            <div asp-validation-summary="All" class="alert-danger"></div>
+            <input asp-for="CourseId" hidden />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
 
-    }
-    else
-    {
-        <button type="submit">Create</button>
+                        </div>
 
-    }
+                    </div>
 
-</form>
+                   
+
+                </div>
+
+                @if (Model?.CourseId != null)
+                {
+                    <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success mt-3 w-100">Create</button>
+                }
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
