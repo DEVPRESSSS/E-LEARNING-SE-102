@@ -27,7 +27,6 @@
                             </p>
 
                             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                                <div asp-validation-summary="All" class="text-danger mb-2"></div>
 
                                 <!-- Names -->
                                 <div class="row g-2">
@@ -102,10 +101,11 @@
                                 <!-- Footer -->
                                 <div class="text-center mt-2">
                                     <span class="text-muted small">Already have an account?</span>
-                                    <a asp-controller="Home" asp-action="Login"
+                                    <a asp-area="Identity" asp-page="/Account/Login"
                                        class="text-decoration-none small fw-semibold ms-1">
                                         Login
                                     </a>
+
                                 </div>
                             </form>
                         </div>
