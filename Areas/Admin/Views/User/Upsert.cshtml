@@ -1,0 +1,62 @@
+﻿@model ApplicationUser
+
+<form asp-action="Upsert" method="post">
+    <div asp-validation-summary="All" class="alert-danger"></div>
+    <input asp-for="Id" hidden />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="MiddleName" class="form-label"></label>
+                    <input asp-for="MiddleName" class="form-control" />
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            @if(Model?.Id == null)
+             {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PasswordHash" class="form-label"></label>
+                        <input asp-for="PasswordHash" type="password" class="form-control" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+              
+           
+        </div>
+
+        @if (Model?.Id != null)
+        {
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-success mt-3">Create</button>
+        }
+    </div>
+</form>

@@ -8,94 +8,116 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_LEARNING_SE_102_PROJECT.styles.css" asp-append-version="true" />
-@*     <script src="https://cdn.tiny.cloud/1/xoe2vhd8f1qd6rziqh9w3rlnb4v4yfjqaxetj7hnztmmx1ik/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
- *@
-@*     <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: [
-                // Core editing features
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                // Your account includes a free trial of TinyMCE premium features
-                // Try the most popular premium features until Jan 17, 2026:
-                'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
-            ],
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-            uploadcare_public_key: '7217749889970980e0a2',
-        });
-    </script> *@
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">E-LEARNING</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 d-flex justify-content-center">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                      
-                        @if (User.IsInRole(SD.Admin))
+    
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-center shadow">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">E-LEARNING</a>
+                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1 d-flex justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                        </ul>
+
+                        <partial name="_LoginPartial.cshtml" />
+                    </div>
+                </div>
+            </nav>
+            @if (!User.IsInRole(SD.Admin))
+            {
+                <div class="course-menu text-center shadow bg-dark" id="courseMenu">
+                    @if (ViewBag.Courses != null)
+                    {
+                        foreach (var item in ViewBag.Courses)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Course" asp-action="Index">Courses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Lesson" asp-action="Index">Lessons</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Content" asp-action="Index">Contents</a>
-                            </li>
-                        
+                            <a class="course-navigation"
+                               asp-area="Learner"
+                               asp-action="Lesson"
+                               asp-controller="Home"
+                               asp-route-courseId="@item.CourseId">
+                                @item.Title
+                            </a>
                         }
-                      
-              
-                   
-                            
-                    </ul>
-                  
-                    <partial name="_LoginPartial.cshtml"/>
+                    }
+                </div>
+
+            }
+        </header>
+    
+
+    <!--Sidebar content protoype-->
+    @if (User.IsInRole(SD.Admin))
+    {
+        <div class="d-flex m-0">
+            <div class="sidebar bg-dark p-3" style="width: 250px; min-height: calc(100vh - 56px);">
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" href="#" style="transition: all 0.3s;">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Course" asp-action="Index" style="transition: all 0.3s;">
+                            <i class="fas fa-book me-2"></i>
+                            Courses
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Lesson" asp-action="Index" style="transition: all 0.3s;">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Lessons
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Content" asp-action="Index" style="transition: all 0.3s;">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Contents
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="User" asp-action="Index" style="transition: all 0.3s;">
+                            <i class="fas fa-users me-2"></i>
+                            App Users
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex-grow-1 p-4" >
+                <main role="main" class="container-fluid">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container min-vh-100">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+ 
+    
+ 
+
+    <footer class="bg-dark text-light border-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    &copy; 2025 <span class="fw-bold">devpress101</span> & <span class="fw-bold">Sora</span>. All rights reserved.
                 </div>
             </div>
-        </nav>
-        <div class="course-menu text-center" id="courseMenu">
-            @if (ViewBag.Courses != null)
-            {
-                foreach (var item in ViewBag.Courses)
-                {
-                    <a class="course-navigation" 
-                    asp-area="Learner"
-                    asp-action="Lesson" 
-                    asp-controller="Home" 
-                    asp-route-courseId="@item.CourseId">
-                        @item.Title
-                    </a>
-                }
-            }
-        </div>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container text-center">
-            &copy; 2025 - devpress101 - & Sora
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
