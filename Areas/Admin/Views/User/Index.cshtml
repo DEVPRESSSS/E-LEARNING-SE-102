@@ -30,7 +30,7 @@
                 <td>@item.Email</td>
                 <td>
                     <a class="btn btn-outline-primary" asp-controller="User" asp-action="Upsert" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-danger" asp-action="Lock" asp-controller="User" asp-route-id="@item.Id">Lock</a>
+                    <a class="btn btn-outline-danger" asp-action="Lock" asp-controller="User" asp-route-id="@item.Id">Lock</a>
                 </td>
             </tr>
         }

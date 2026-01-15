@@ -1,32 +1,39 @@
 ﻿@model List<Contents>
-<h5>Content list</h5>
-<a asp-action="Upsert" asp-controller="Content">Create</a>
-<table class="mt-2">
-    <tr>
-        <td>ContentId</td>
-        <td>Description</td>
-        <td>FilePath</td>
-        <td>FileType</td>
-        <td>Lesson</td>
-        <td>UploadedAt</td>
-        <td>Action</td>
 
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="shadow-lg mt-5 p-2">
+
+    <div class="border-bottom-1">
+        <h6>Content list</h6>
+
+    </div>
+    <a class="btn btn-success" asp-action="Upsert" asp-controller="Content">Create</a>
+    <table class="table">
         <tr>
-            <td>@item.ContentId</td>
-            <td>@item.Description</td>
-            <td>@item.FilePath</td>
-            <td>@item.FileType</td>
-            <td>@item.Lesson.Title</td>
-            <td>@item.UploadedAt</td>
-            <td>
-                <a asp-action="Upsert" asp-controller="Content" asp-route-id="@item.ContentId">Edit</a>
-                <a asp-action="Delete" asp-controller="Content" asp-route-id="@item.ContentId">Delete</a>
-            </td>
+            <td>ContentId</td>
+            <td>Description</td>
+            <td>FilePath</td>
+            <td>FileType</td>
+            <td>Lesson</td>
+            <td>UploadedAt</td>
+            <td>Action</td>
+
         </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ContentId</td>
+                <td>@item.Description</td>
+                <td>@item.FilePath</td>
+                <td>@item.FileType</td>
+                <td>@item.Lesson.Title</td>
+                <td>@item.UploadedAt?.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="Content" asp-route-id="@item.ContentId">Edit</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Content" asp-route-id="@item.ContentId">Delete</a>
+                </td>
+            </tr>
+        }
 
+    </table>
 
-</table>
+</div>
