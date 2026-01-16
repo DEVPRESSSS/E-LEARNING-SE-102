@@ -4,6 +4,7 @@ using E_LEARNING_SE_102_PROJECT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_LEARNING_SE_102_PROJECT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260116011440_RemoveRequiredInFilePathAndFileTypeInContentsTbl")]
+    partial class RemoveRequiredInFilePathAndFileTypeInContentsTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,13 +46,13 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -59,8 +62,8 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -151,9 +154,6 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.HasIndex("Title")
-                        .IsUnique();
-
                     b.ToTable("Courses");
                 });
 
@@ -182,9 +182,6 @@ namespace E_LEARNING_SE_102_PROJECT.Migrations
                     b.HasKey("LessonId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });

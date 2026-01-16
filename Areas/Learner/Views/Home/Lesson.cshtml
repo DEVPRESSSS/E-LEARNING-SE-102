@@ -1,5 +1,7 @@
+@using Microsoft.AspNetCore.Identity
 @model List<Lesson>
-    
+@inject SignInManager<ApplicationUser> SignInManager
+
 @if (Model?.Count() > 0)
 {
     <div class="container mt-4">
@@ -33,7 +35,7 @@
 
                 @if (lesson != null)
                 {
-                    <div class="lesson-card border rounded shadow-sm p-3 mb-4" style="max-height: 100vh; overflow-y: auto;">
+                    <div class="lesson-card border rounded shadow-sm p-3 mb-4">
                         <div class="lesson-body mb-3 vh-100">
                             @if (lesson.Contents != null && lesson.Contents.Any())
                             {
@@ -50,12 +52,22 @@
                                                 }
                                             </small>
                                         </div>
-                                        <a href="@Url.Content(content.FilePath)" 
-                                        class="btn btn-sm btn-outline-primary"
-                                        target="_blank"
-                                        rel="noopener noreferrer">
-                                            View
-                                        </a>
+                                        @if (SignInManager.IsSignedIn(User) || User.IsInRole("Learner"))
+                                        {
+                                            <a asp-area="Learner" asp-controller="Lesson" asp-action="ViewLesson"
+                                                class="btn btn-sm btn-outline-success"
+                                                >
+                                                View
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-outline-success text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">View</a>
+
+                                        }
+
+                                        
+
                                     </div>
                                 }
                             }

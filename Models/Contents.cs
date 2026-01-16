@@ -16,10 +16,9 @@ namespace E_LEARNING_SE_102_PROJECT.Models
         public string? Description { get; set; }
 
         // File info
-        [Required,MaxLength(100)]
+        [MaxLength(100)]
         public string FilePath { get; set; } = string.Empty;
 
-        [Required]
         public string? FileType { get; set; } 
 
         public DateTime?UploadedAt { get; set; }

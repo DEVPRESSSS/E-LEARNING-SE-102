@@ -1,5 +1,6 @@
 using E_LEARNING_SE_102_PROJECT.Data;
 using E_LEARNING_SE_102_PROJECT.Models;
+using E_LEARNING_SE_102_PROJECT.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ using System.Diagnostics;
 
 namespace E_LEARNING_SE_102_PROJECT.Areas.Learner.Controllers
 {
-    [Area("Learner")]
+    [Area(SD.Learner)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
