@@ -54,7 +54,7 @@
                                         </div>
                                         @if (SignInManager.IsSignedIn(User) || User.IsInRole("Learner"))
                                         {
-                                            <a asp-area="Learner" asp-controller="Lesson" asp-action="ViewLesson"
+                                            <a asp-area="Learner" asp-controller="Lesson" asp-action="ViewLesson" asp-route-id="@content.ContentId"
                                                 class="btn btn-sm btn-outline-success"
                                                 >
                                                 View

@@ -1,10 +1,11 @@
-﻿
+﻿@model Contents
+
 <div class="bg-success text-white py-5 mt-3">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="display-4 fw-bold">Introduction to Web Development</h1>
-                <p class="lead">Learn the fundamentals of building modern websites</p>
+                <h1 class="display-4 fw-bold">@Model.Lesson?.Title</h1>
+                <p class="lead">@Model.Lesson?.Description</p>
                 <div class="mt-4">
                     <span class="badge bg-light text-dark me-2">Beginner</span>
                     <span class="badge bg-light text-dark me-2">30 min read</span>
@@ -23,9 +24,9 @@
                     <h5 class="card-title mb-3">Table of Contents</h5>
                     <div class="list-group list-group-flush">
                         <a href="#intro" class="list-group-item list-group-item-action">Introduction</a>
-                        <a href="#basics" class="list-group-item list-group-item-action">The Basics</a>
+                       @*  <a href="#basics" class="list-group-item list-group-item-action">The Basics</a>
                         <a href="#practice" class="list-group-item list-group-item-action">Practical Example</a>
-                        <a href="#summary" class="list-group-item list-group-item-action">Summary</a>
+                        <a href="#summary" class="list-group-item list-group-item-action">Summary</a> *@
                     </div>
                 </div>
             </div>
@@ -35,12 +36,13 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body p-4 p-md-5">
                     <section id="intro" class="mb-5">
-                        <h2 class="text-primary border-bottom border-primary border-3 pb-2 mb-4">Introduction</h2>
-                        <p>Web development is an exciting field that combines creativity with technical skills. In this lesson, we'll explore the fundamental concepts that form the foundation of modern web development.</p>
+                        <h2 class="text-primary border-bottom border-primary border-3 pb-2 mb-4">Content</h2>
+             
+                        <p>@Html.Raw(@Model.Description)</p>
 
-                        <p>Whether you're building a personal blog, an e-commerce platform, or a complex web application, understanding these core principles will set you on the right path to success.</p>
-
-                        <div class="alert alert-primary border-start border-4 border-primary" role="alert">
+@*                         <p>Whether you're building a personal blog, an e-commerce platform, or a complex web application, understanding these core principles will set you on the right path to success.</p>
+ *@
+                         @*    <div class="alert alert-primary border-start border-4 border-primary" role="alert">
                             <h5 class="alert-heading fw-bold">Learning Objectives</h5>
                             <ul class="mb-0">
                                 <li>Understand the structure of web pages</li>
@@ -48,10 +50,10 @@
                                 <li>Create your first responsive webpage</li>
                                 <li>Apply best practices in web development</li>
                             </ul>
-                        </div>
+                        </div> *@
                     </section>
 
-                    <section id="basics" class="mb-5">
+                    @* <section id="basics" class="mb-5">
                         <h2 class="text-primary border-bottom border-primary border-3 pb-2 mb-4">The Basics</h2>
 
                         <h4 class="mt-4 mb-3">HTML: The Structure</h4>
@@ -91,8 +93,8 @@
 
                         <p>This simple example demonstrates the basic structure every HTML page should have. The head contains metadata, while the body contains the visible content.</p>
                     </section>
-
-                    <section id="summary" class="mb-5">
+ *@
+       @*              <section id="summary" class="mb-5">
                         <h2 class="text-primary border-bottom border-primary border-3 pb-2 mb-4">Summary</h2>
                         <p>In this lesson, we've covered the fundamental building blocks of web development. You've learned about HTML for structure, CSS for styling, and JavaScript for interactivity.</p>
 
@@ -126,7 +128,7 @@
                         <div class="alert alert-warning border-start border-4 border-warning mt-4" role="alert">
                             <strong>Next Steps:</strong> Practice building simple pages using these technologies. Start with static HTML pages, then add CSS styling, and finally incorporate JavaScript for interactivity.
                         </div>
-                    </section>
+                    </section> *@
 
                     <div class="d-flex justify-content-between pt-4 border-top">
                         <button class="btn btn-outline-secondary">← Previous Lesson</button>
