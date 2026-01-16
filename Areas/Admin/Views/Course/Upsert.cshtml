@@ -1,39 +1,122 @@
 ﻿@model Courses
 
-
-<div class="d-flex justify-content-center align-items-center">
-    <div class="card shadow-sm w-50 p-2 border-">
-        <form asp-action="Upsert" method="post">
-            <div asp-validation-summary="All" class="alert-danger"></div>
-            <input asp-for="CourseId" hidden />
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="Title" class="form-label"></label>
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-
-                        </div>
-
-                    </div>
-
-                   
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="mb-0 text-dark fw-semibold">
+                        @(Model?.CourseId != null ? "Edit Course" : "Create New Course")
+                    </h5>
+                    <p class="text-muted small mb-0 mt-1">
+                        @(Model?.CourseId != null ? "Update the course information below" : "Fill in the details to create a new course")
+                    </p>
                 </div>
-
+                
+                <div class="card-body p-4">
+                    <form asp-action="Upsert" method="post" id="courseForm">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Please correct the following errors:</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                        <input asp-for="CourseId" type="hidden" />
+                        
+                        <div class="mb-4">
+                            <label asp-for="Title" class="form-label fw-semibold">
+                                Course Title <span class="text-danger">*</span>
+                            </label>
+                            <input asp-for="Title" 
+                                   class="form-control form-control-lg" 
+                                   placeholder="Enter course title"
+                                   autofocus />
+                            <span asp-validation-for="Title" class="text-danger small"></span>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Enter a descriptive title for the course
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            @if (Model?.CourseId != null)
+                            {
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-check-circle me-2"></i>Update Course
+                                </button>
+                                <a asp-action="Index" asp-controller="Course" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle me-2"></i>Cancel
+                                </a>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-plus-circle me-2"></i>Create Course
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-counterclockwise me-2"></i>Reset Form
+                                </button>
+                            }
+                        </div>
+                    </form>
+                </div>
+                
                 @if (Model?.CourseId != null)
                 {
-                    <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-success mt-3 w-100">Create</button>
+                    <div class="card-footer bg-light border-top text-muted small py-2">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Course ID: <strong>@Model.CourseId</strong>
+                    </div>
                 }
             </div>
-        </form>
+        </div>
     </div>
-
-
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Add form submission feedback
+        document.getElementById('courseForm').addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            
+            // Re-enable if validation fails
+            setTimeout(() => {
+                if (!this.checkValidity()) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            }, 100);
+        });
+        
+        // Auto-dismiss alerts after 5 seconds
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+    </script>
+}
+
+<style>
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+    
+    .card {
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+</style>

@@ -4,42 +4,72 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav ms-auto">
 @if (SignInManager.IsSignedIn(User))
 {
+    var user = await UserManager.GetUserAsync(User);
+    var fullName = user != null ? $"{user.FirstName} {user.LastName}" : "User";
+    var role = User.IsInRole("Learner") ? "Learner" : "Admin";
+    
 
-        <li class="nav-item">
-            @if (User.IsInRole("Learner"))
-            {
-                <a id="manage" class="nav-link text-white d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                    <i class="fas fa-user-circle me-2"></i>
-                    Welcome learner @UserManager.GetUserName(User)!
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-dark d-flex align-items-center"
+           href="#"
+           id="profileDropdown"
+           role="button"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
+
+            <i class="fas fa-user-circle fs-4 me-2"></i>
+            <span class="d-none d-md-inline">@fullName</span>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li class="px-3 py-2">
+                <div class="fw-semibold">@fullName</div>
+                <small class="text-muted">@role</small>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+                <a class="dropdown-item"
+                   asp-area="Identity"
+                   asp-page="/Account/Manage/Index">
+                    <i class="fas fa-cog me-2"></i>
+                    Manage Profile
                 </a>
-            }
-            else
-            {
-                <a id="manage" class="nav-link text-white d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                    <i class="fas fa-user-shield me-2"></i>
-                    Welcome admin @* @UserManager.GetUserName(User)! *@
-                </a>
-            }
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-white d-flex align-items-center">
-                    <i class="fas fa-sign-out-alt me-2"></i>
-                    Logout
-                </button>
-            </form>
-        </li>
+            </li>
+
+            <li>
+                <form asp-area="Identity"
+                      asp-page="/Account/Logout"
+                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item text-danger">
+                        <i class="fas fa-sign-out-alt me-2"></i>
+                        Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link text-dark"
+           asp-area="Identity"
+           asp-page="/Account/Login">
+            Login
+        </a>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link text-dark"
+           asp-area="Identity"
+           asp-page="/Account/Register">
+            Register
+        </a>
     </li>
 }
 </ul>

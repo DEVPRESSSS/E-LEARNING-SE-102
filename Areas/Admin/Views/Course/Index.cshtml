@@ -1,33 +1,64 @@
 ﻿@model List<Courses>
 
-<div class="shadow-lg mt-5 p-2">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0 text-dark fw-semibold">Course Management</h5>
+                <a class="btn btn-success btn-sm" asp-action="Upsert" asp-controller="Course">
+                    <i class="bi bi-plus-circle me-1"></i>Add New Course
+                </a>
+        </div>
+        <div class="card-body p-0">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-muted small fw-semibold">Id</th>
+                                <th scope="col" class="text-muted small fw-semibold">Title</th>
+                                <th scope="col" class="text-muted small fw-semibold">Created</th>
+                                <th scope="col" class="text-muted small fw-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-muted small">@item.CourseId</td>
+                                <td>
+                                    <span class="badge bg-light text-dark border">@item.Title</span>
+                                </td>
+                                <td>@item.CreatedAt?.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="Course" asp-route-id="@item.CourseId">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Course" asp-route-id="@item.CourseId">
+                                        <i class="fas fa-lock"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
 
-    <div class="border-bottom-1">
-        <h6>Courses list</h6>
-
-    </div>
-    <a class="btn btn-success" asp-action="Upsert" asp-controller="Course">Create</a>
-    <table class="table">
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Created</td>
-            <td>Action</td>
-
-        </tr>
-        @foreach (var item in Model)
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-people text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-3">No Course Found. Create your Course to get started.</p>
+                        <a class="btn btn-success mt-2" asp-action="Upsert" asp-controller="Course">
+                            <i class="bi bi-plus-circle me-1"></i>Add New Course
+                        </a>
+                </div>
+            }
+        </div>
+        @if (Model != null && Model.Any())
         {
-            <tr>
-                <td>@item.CourseId</td>
-                <td>@item.Title</td>
-                <td>@item.CreatedAt?.ToString("yyyy-MM-dd")</td>
-                <td>
-                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="Course" asp-route-id="@item.CourseId">Edit</a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Course" asp-route-id="@item.CourseId">Delete</a>
-                </td>
-            </tr>
+            <div class="card-footer bg-white border-top text-muted small py-2">
+                <span>Total Users: <strong>@Model.Count</strong></span>
+            </div>
         }
-
-    </table>
-
+    </div>
 </div>

@@ -2,75 +2,178 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">
-                        @(Model?.ContentId != null ? "Update Content" : "Create Content")
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="mb-0 text-dark fw-semibold">
+                        @(Model?.ContentId != null ? "Edit Content" : "Create New Content")
                     </h5>
+                    <p class="text-muted small mb-0 mt-1">
+                        @(Model?.ContentId != null ? "Update the content information below" : "Fill in the details to create new content")
+                    </p>
                 </div>
-
-                <div class="card-body">
-                    <form asp-action="Upsert" method="post">
-                        <input asp-for="ContentId" hidden />
-
+                
+                <div class="card-body p-4">
+                    <form asp-action="Upsert" method="post" id="contentForm">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Please correct the following errors:</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                        <input asp-for="ContentId" type="hidden" />
+                        
                         <!-- Description -->
-                        <div class="mb-3">
-                            <label asp-for="Description" class="form-label"></label>
-                            <textarea
-                                      asp-for="Description"
-                                      rows="5"
-                                      class="form-control"></textarea>
+                        <div class="mb-4">
+                            <label asp-for="Description" class="form-label fw-semibold">
+                                Description <span class="text-danger">*</span>
+                            </label>
+                            <textarea asp-for="Description" 
+                                      rows="5" 
+                                      class="form-control" 
+                                      placeholder="Enter content description"
+                                      autofocus></textarea>
                             <span asp-validation-for="Description" class="text-danger small"></span>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Provide a detailed description of the content
+                            </div>
                         </div>
 
-                        <!-- File Path -->
-                        <div class="mb-3">
-                            <label asp-for="FilePath" class="form-label"></label>
-                            <input asp-for="FilePath" class="form-control" />
-                            <span asp-validation-for="FilePath" class="text-danger small"></span>
-                        </div>
+                        <div class="row g-3">
+                            <!-- File Path -->
+                            <div class="col-md-6">
+                                <label asp-for="FilePath" class="form-label fw-semibold">
+                                    File Path <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="FilePath" 
+                                    class="form-control" 
+                                    placeholder="e.g., /uploads/documents/file.pdf" />
+                                <span asp-validation-for="FilePath" class="text-danger small"></span>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    Enter the path where the file is stored
+                                </div>
+                            </div>
 
-                        <!-- File Type -->
-                        <div class="mb-3">
-                            <label asp-for="FileType" class="form-label"></label>
-                            <input asp-for="FileType" class="form-control" />
-                            <span asp-validation-for="FileType" class="text-danger small"></span>
+                            <!-- File Type -->
+                            <div class="col-md-6">
+                                <label asp-for="FileType" class="form-label fw-semibold">
+                                    File Type <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="FileType" 
+                                    class="form-control" 
+                                    placeholder="e.g., PDF, Video, Document" />
+                                <span asp-validation-for="FileType" class="text-danger small"></span>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    Specify the type of content (PDF, Video, Image, etc.)
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Lesson Dropdown -->
                         <div class="mb-4">
-                            <label asp-for="LessonId" class="form-label"></label>
+                            <label asp-for="LessonId" class="form-label fw-semibold">
+                                Associated Lesson <span class="text-danger">*</span>
+                            </label>
                             <select asp-for="LessonId"
                                     asp-items="ViewBag.LessonsList"
-                                    class="form-select">
-                                <option value="">-- Select lesson --</option>
+                                    class="form-select form-select-lg">
+                                <option value=""> Select a lesson </option>
                             </select>
                             <span asp-validation-for="LessonId" class="text-danger small"></span>
+                            <div class="form-text">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Choose the lesson this content belongs to
+                            </div>
                         </div>
-
-                        <!-- Buttons -->
-                        <div class="d-flex justify-content-end gap-2">
-                            <a asp-action="Index" class="btn btn-outline-secondary">
-                                Cancel
-                            </a>
-
+                        
+                        <div class="d-grid gap-2 mt-4">
                             @if (Model?.ContentId != null)
                             {
-                                <button type="submit" class="btn btn-primary">
-                                    Update
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-check-circle me-2"></i>Update Content
                                 </button>
+                                <a asp-action="Index" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle me-2"></i>Cancel
+                                </a>
                             }
                             else
                             {
-                                <button type="submit" class="btn btn-success">
-                                    Create
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-plus-circle me-2"></i>Create Content
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-counterclockwise me-2"></i>Reset Form
                                 </button>
                             }
                         </div>
                     </form>
                 </div>
+                
+                @if (Model?.ContentId != null)
+                {
+                    <div class="card-footer bg-light border-top text-muted small py-2">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Content ID: <strong>@Model.ContentId</strong>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Add form submission feedback
+        document.getElementById('contentForm').addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            
+            // Re-enable if validation fails
+            setTimeout(() => {
+                if (!this.checkValidity()) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            }, 100);
+        });
+        
+        // Auto-dismiss alerts after 5 seconds
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+    </script>
+}
+
+<style>
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+    
+    .card {
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+    
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+</style>

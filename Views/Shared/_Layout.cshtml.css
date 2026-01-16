@@ -45,3 +45,39 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+/* Sidebar hover effects */
+.sidebar-link {
+  position: relative;
+  overflow: hidden;
+}
+    
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(5px);
+  color: #fff !important;
+}
+    
+.sidebar-link.active,
+.sidebar-link:active {
+  background: linear-gradient(135deg, #1b6ec2 0%, #1861ac 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 8px rgba(27, 110, 194, 0.3);
+}
+    
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: #1b6ec2;
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+    
+.sidebar-link:hover::before,
+.sidebar-link.active::before {
+  transform: scaleY(1);
+}

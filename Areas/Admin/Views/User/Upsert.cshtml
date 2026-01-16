@@ -1,62 +1,178 @@
 ﻿@model ApplicationUser
 
-<form asp-action="Upsert" method="post">
-    <div asp-validation-summary="All" class="alert-danger"></div>
-    <input asp-for="Id" hidden />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="FirstName" class="form-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="mb-0 text-dark fw-semibold">
+                        @(Model?.Id != null ? "Edit User" : "Create New User")
+                    </h5>
+                    <p class="text-muted small mb-0 mt-1">
+                        @(Model?.Id != null ? "Update the user information below" : "Fill in the details to create a new user account")
+                    </p>
                 </div>
-            </div>
+                
+                <div class="card-body p-4">
+                    <form asp-action="Upsert" method="post" id="userForm">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Please correct the following errors:</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                        <input asp-for="Id" type="hidden" />
+                        
+                        <div class="row">
+                            <!-- First Name -->
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="FirstName" class="form-label fw-semibold">
+                                    First Name <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="FirstName" 
+                                       class="form-control" 
+                                       placeholder="Enter first name"
+                                       autofocus />
+                                <span asp-validation-for="FirstName" class="text-danger small"></span>
+                            </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="MiddleName" class="form-label"></label>
-                    <input asp-for="MiddleName" class="form-control" />
-                    <span asp-validation-for="MiddleName" class="text-danger"></span>
-                </div>
-            </div>
+                            <!-- Middle Name -->
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="MiddleName" class="form-label fw-semibold">
+                                    Middle Name
+                                </label>
+                                <input asp-for="MiddleName" 
+                                       class="form-control" 
+                                       placeholder="Enter middle name (optional)" />
+                                <span asp-validation-for="MiddleName" class="text-danger small"></span>
+                            </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="LastName" class="form-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
+                            <!-- Last Name -->
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="LastName" class="form-label fw-semibold">
+                                    Last Name <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="LastName" 
+                                       class="form-control" 
+                                       placeholder="Enter last name" />
+                                <span asp-validation-for="LastName" class="text-danger small"></span>
+                            </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" type="email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                            <!-- Email -->
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="Email" class="form-label fw-semibold">
+                                    Email Address <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Email" 
+                                       type="email" 
+                                       class="form-control" 
+                                       placeholder="Enter email address" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    This will be used for login
+                                </div>
+                            </div>
+
+                            <!-- Password (only for new users) -->
+                            @if(Model?.Id == null)
+                            {
+                                <div class="col-md-6 mb-4">
+                                    <label asp-for="PasswordHash" class="form-label fw-semibold">
+                                        Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input asp-for="PasswordHash" 
+                                           type="password" 
+                                           class="form-control" 
+                                           placeholder="Enter password" />
+                                    <span asp-validation-for="PasswordHash" class="text-danger small"></span>
+                                    <div class="form-text">
+                                        <i class="bi bi-shield-lock me-1"></i>
+                                        Must be at least 6 characters long
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            @if (Model?.Id != null)
+                            {
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-check-circle me-2"></i>Update User
+                                </button>
+                                <a asp-action="Index" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle me-2"></i>Cancel
+                                </a>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="bi bi-plus-circle me-2"></i>Create User
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-counterclockwise me-2"></i>Reset Form
+                                </button>
+                            }
+                        </div>
+                    </form>
                 </div>
-            </div>
-            @if(Model?.Id == null)
-             {
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="PasswordHash" class="form-label"></label>
-                        <input asp-for="PasswordHash" type="password" class="form-control" />
-                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                
+                @if (Model?.Id != null)
+                {
+                    <div class="card-footer bg-light border-top text-muted small py-2">
+                        <i class="bi bi-info-circle me-1"></i>
+                        User ID: <strong>@Model.Id</strong>
                     </div>
-                </div>
-            }
-              
-           
+                }
+            </div>
         </div>
-
-        @if (Model?.Id != null)
-        {
-            <button type="submit" class="btn btn-primary mt-3 w-100">Update</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-success mt-3 w-100">Create</button>
-        }
     </div>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Add form submission feedback
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            
+            // Re-enable if validation fails
+            setTimeout(() => {
+                if (!this.checkValidity()) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            }, 100);
+        });
+        
+        // Auto-dismiss alerts after 5 seconds
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+    </script>
+}
+
+<style>
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+    
+    .card {
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+    }
+</style>

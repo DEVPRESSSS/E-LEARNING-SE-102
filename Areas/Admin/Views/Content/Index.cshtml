@@ -1,39 +1,74 @@
 ﻿@model List<Contents>
 
-<div class="shadow-lg mt-5 p-2">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+            <h5 class="mb-0 text-dark fw-semibold">Content Management</h5>
+            <a class="btn btn-success btn-sm" asp-action="Upsert" asp-controller="Content">
+                <i class="bi bi-plus-circle me-1"></i>Add New Content
+            </a>
+        </div>
+        <div class="card-body p-0">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                <th scope="col" class="text-muted small fw-semibold">ContentId</th>
+                                <th scope="col" class="text-muted small fw-semibold">Description</th>
+                                <th scope="col" class="text-muted small fw-semibold">FilePath</th>
+                                <th scope="col" class="text-muted small fw-semibold">FileType</th>
+                                <th scope="col" class="text-muted small fw-semibold">Lesson</th>
+                                <th scope="col" class="text-muted small fw-semibold">UploadedAt</th>
+                                <th scope="col" class="text-muted small fw-semibold">Actions</th>
+                            </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-muted small">@item.ContentId</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">@item.FilePath</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">@item.FileType</span>
+                                    </td>
+                                    <td>@item.Lesson.Title</td>
+                                    <td>@item.UploadedAt?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <div class="d-flex gap-2 justify-content-center">
+                                            <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="Content" asp-route-id="@item.ContentId">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Content" asp-route-id="@item.ContentId">
+                                                <i class="fas fa-lock"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
 
-    <div class="border-bottom-1">
-        <h6>Content list</h6>
-
-    </div>
-    <a class="btn btn-success" asp-action="Upsert" asp-controller="Content">Create</a>
-    <table class="table">
-        <tr>
-            <td>ContentId</td>
-            <td>Description</td>
-            <td>FilePath</td>
-            <td>FileType</td>
-            <td>Lesson</td>
-            <td>UploadedAt</td>
-            <td>Action</td>
-
-        </tr>
-        @foreach (var item in Model)
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-people text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-3">No ContentContent found. Create your Content to get started.</p>
+                    <a class="btn btn-success mt-2" asp-action="Upsert" asp-controller="Content">
+                        <i class="bi bi-plus-circle me-1"></i>Add New Content
+                    </a>
+                </div>
+            }
+        </div>
+        @if (Model != null && Model.Any())
         {
-            <tr>
-                <td>@item.ContentId</td>
-                <td>@item.Description</td>
-                <td>@item.FilePath</td>
-                <td>@item.FileType</td>
-                <td>@item.Lesson.Title</td>
-                <td>@item.UploadedAt?.ToString("yyyy-MM-dd")</td>
-                <td>
-                    <a class="btn btn-outline-primary" asp-action="Upsert" asp-controller="Content" asp-route-id="@item.ContentId">Edit</a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Content" asp-route-id="@item.ContentId">Delete</a>
-                </td>
-            </tr>
+            <div class="card-footer bg-white border-top text-muted small py-2">
+                <span>Total Users: <strong>@Model.Count</strong></span>
+            </div>
         }
-
-    </table>
-
+    </div>
 </div>

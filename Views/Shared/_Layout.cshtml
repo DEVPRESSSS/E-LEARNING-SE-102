@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="~/E_LEARNING_SE_102_PROJECT.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-<body>
-    
+<body class="d-flex flex-column min-vh-100">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-center shadow">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light text-center shadow">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">E-LEARNING</a>
-                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/logo.png" alt="E-LEARNING Logo" height="20">
+                    </a>
+                    <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -25,10 +26,10 @@
                              @if (!User.IsInRole(SD.Admin))
                              {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="Learner" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="Learner" asp-controller="Home" asp-action="Index">About Us</a>
+                                    <a class="nav-link text-dark" asp-area="Learner" asp-controller="Home" asp-action="Index">About Us</a>
                                 </li>
                              }
 
@@ -40,7 +41,7 @@
             </nav>
             @if (!User.IsInRole(SD.Admin))
             {
-                <div class="course-menu text-center shadow bg-dark" id="courseMenu">
+                <div class="course-menu text-center shadow" style="background-color: #0c953e" id="courseMenu">
                     @if (ViewBag.Courses != null)
                     {
                         foreach (var item in ViewBag.Courses)
@@ -60,46 +61,66 @@
         </header>
     
 
-    <!--Sidebar content protoype-->
+    <!--Sidebar content-->
     @if (User.IsInRole(SD.Admin))
     {
-        <div class="d-flex m-0">
-            <div class="sidebar bg-dark p-3" style="width: 150px; min-height: calc(100vh - 56px);">
-                <ul class="nav flex-column mt-4">
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" href="#" style="transition: all 0.3s;">
-                            <i class="fas fa-tachometer-alt me-2"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Course" asp-action="Index" style="transition: all 0.3s;">
-                            <i class="fas fa-book me-2"></i>
-                            Course
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Lesson" asp-action="Index" style="transition: all 0.3s;">
-                            <i class="fas fa-graduation-cap me-2"></i>
-                            Lesson
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="Content" asp-action="Index" style="transition: all 0.3s;">
-                            <i class="fas fa-file-alt me-2"></i>
-                            Content
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a class="nav-link text-white d-flex align-items-center px-3 py-2 rounded" asp-area="Admin" asp-controller="User" asp-action="Index" style="transition: all 0.3s;">
-                            <i class="fas fa-users me-2"></i>
-                            Users
-                        </a>
-                    </li>
-                </ul>
+        <div class="d-flex m-0" style="min-height: 100vh;">
+            <div class="sidebar bg-success" style="width: 250px; min-height: 100vh; box-shadow: 2px 0 10px rgba(0,0,0,0.1);">
+                <div class="p-4">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-1">
+                            <a class="nav-link text-white d-flex align-items-center px-3 py-3 rounded-3 sidebar-link" 
+                            href="#"
+                            style="transition: all 0.3s ease;">
+                                <i class="fas fa-tachometer-alt me-3" style="width: 20px;"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-1">
+                            <a class="nav-link text-white d-flex align-items-center px-3 py-3 rounded-3 sidebar-link" 
+                            asp-area="Admin" 
+                            asp-controller="Course" 
+                            asp-action="Index"
+                            style="transition: all 0.3s ease;">
+                                <i class="fas fa-book me-3" style="width: 20px;"></i>
+                                <span>Courses</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-1">
+                            <a class="nav-link text-white d-flex align-items-center px-3 py-3 rounded-3 sidebar-link" 
+                            asp-area="Admin" 
+                            asp-controller="Lesson" 
+                            asp-action="Index"
+                            style="transition: all 0.3s ease;">
+                                <i class="fas fa-graduation-cap me-3" style="width: 20px;"></i>
+                                <span>Lessons</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-1">
+                            <a class="nav-link text-white d-flex align-items-center px-3 py-3 rounded-3 sidebar-link" 
+                            asp-area="Admin" 
+                            asp-controller="Content" 
+                            asp-action="Index"
+                            style="transition: all 0.3s ease;">
+                                <i class="fas fa-file-alt me-3" style="width: 20px;"></i>
+                                <span>Content</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-1">
+                            <a class="nav-link text-white d-flex align-items-center px-3 py-3 rounded-3 sidebar-link" 
+                            asp-area="Admin" 
+                            asp-controller="User" 
+                            asp-action="Index"
+                            style="transition: all 0.3s ease;">
+                                <i class="fas fa-users me-3" style="width: 20px;"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex-grow-1 p-4" >
-                <main role="main" class="container-fluid">
+            <div class="container vh-100">
+                <main role="main" class="flex-grow-1 pb-3">
                     @RenderBody()
                 </main>
             </div>
@@ -107,8 +128,8 @@
     }
     else
     {
-        <div class="container min-vh-100">
-            <main role="main" class="pb-3">
+        <div class="container vh-100">
+            <main role="main" class="flex-grow-1 pb-3">
                 @RenderBody()
             </main>
         </div>
@@ -117,15 +138,16 @@
     
  
 
-    <footer class="bg-dark text-light border-top">
+    <footer class="bg-dark border-top py-4 shadow " style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); background: #adb5bd;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                <div class="text-light col-md-6 text-center text-md-start mb-2 mb-md-0">
                     &copy; 2025 <span class="fw-bold">devpress101</span> & <span class="fw-bold">Sora</span>. All rights reserved.
                 </div>
             </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

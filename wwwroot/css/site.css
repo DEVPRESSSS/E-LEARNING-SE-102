@@ -1,6 +1,6 @@
 :root {
-  --accent: #1ABC9C;
-  --dark: #282A35;
+  --accent: #097a32;
+  --dark: #0c953e;
   --light: #f5f6f7;
 }
 
@@ -28,7 +28,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
   margin: 0;
   padding: 0;
 }
@@ -43,13 +42,13 @@ body {
 }
 
 .course-menu a:hover {
-  background-color: black;
-  color: white;
+  background-color:var(--accent);
+  color: #ffffff;
 }
 
 .course-menu a {
   display: inline-block;
-  color: #fff;
+  color: #1f2937;
   padding: 0.5rem 1rem;
   margin: 0 0.25rem;
   text-decoration: none;
@@ -58,7 +57,7 @@ body {
 }
 
 .course-menu a.active {
-  background: var(--accent);
+  background: #ffc107;
   opacity: 1;
 }
 
